@@ -32,7 +32,7 @@ int main()
     n *root; // Root struct'ı oluşturuldu. İlk n elemanı (root)
     root = (n *)malloc(sizeof(n));
     root -> next = NULL;
-    root->x = 500;
+    root->x = -10;
 
     int count = 0;
     for (int i = 0; i < 5; i++)
