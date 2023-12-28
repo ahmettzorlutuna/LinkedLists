@@ -12,13 +12,10 @@ typedef n node;
 
 void print(node *r)
 {
-    node *iter = r;
-    printf("%d ", iter->x);
-    iter = iter->next;
-    while (iter != r)
+    while (r != NULL)
     {
-        printf("%d ", iter->x);
-        iter = iter->next;
+        printf("%d ", r->x);
+        r = r -> next;
     }
     printf("\n");
 }
@@ -44,7 +41,7 @@ node *addSequential(node *r, int x)
     }
     node *iter = r; // Circular Linked Listte araya eleman eklemenin bir farkı yok. Tek fark iter'in next'i null olana kadar değil de R yani
                     // root'u göstermeyene kadar git dedik. bkz. inserting-elements.cpp 45:9
-    while (iter->next != r && iter->next->x < x)
+    while (iter->next != NULL && iter->next->x < x)
     {
         iter = iter->next;
     }
@@ -52,7 +49,7 @@ node *addSequential(node *r, int x)
     temp->next = iter->next;
     iter->next = temp;
     temp -> prev = iter;
-    if(iter -> next != NULL){
+    if(temp -> next != NULL){
         temp -> next -> prev = temp;
     }
     temp->x = x;
@@ -65,15 +62,12 @@ node *remove(node *r, int x)
     node *iter = r;
     if (r->x == x) // İlk elemanı silme
     {
-        while (iter->next != r)
-        {
-            iter = iter->next;
-        }
-        iter->next = r->next; // İter son elemana geldiğinde iter son elemandan bir sonraki elemana eşit oluyor yani r -> next'ine.
-        free(r) ;
-        return iter->next;
+        temp = r;
+        r = r -> next; // İter son elemana geldiğinde iter son elemandan bir sonraki elemana eşit oluyor yani r -> next'ine.
+        free(temp) ;
+        return r;
     }
-    while (iter -> next != r && iter -> next -> x != x){
+    while (iter -> next != NULL && iter -> next -> x != x){
         iter = iter->next;
     }
     if (iter->next == NULL)
@@ -84,6 +78,9 @@ node *remove(node *r, int x)
     temp = iter->next;
     iter -> next = iter -> next -> next;
     free(temp);
+    if(iter -> next != NULL){
+        iter -> next -> prev = iter;
+    }
     return r;
 }
 
@@ -98,7 +95,7 @@ int main()
     root = addSequential(root, 450);
     root = addSequential(root, 50);
     print(root);
-    root = remove(root, 50);
-    root = remove(root, 450);
+    root = remove(root,40);
+    root = remove(root,450);
     print(root);
 }
