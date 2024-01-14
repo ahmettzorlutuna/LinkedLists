@@ -1,17 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <iostream>
 using namespace std;
 
-int sayi = 10;
+int main()
+{
+  int x = 4;
 
-int *adresi = &sayi;
-
-int deger = *adresi;
-
-int dizi[] = {1, 2, 3, 4, 5};
-int *pDizi = dizi;
-
-
-int main() {
-  cout << dizi;
+  int *pX = &x;
+  cout << &x;
+  cout << pX;
   return 0;
 }
