@@ -1,2 +1,2 @@
 
-    printf("popped..: %d ", pop());
+    push(20);
